@@ -9,11 +9,10 @@
   },
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
-    "cors": "^2.8.4",
-    "express": "^4.16.3",
-    "knex": "^0.14.4",
-    "sqlite3": "^4.0.0"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.19.1",
+    "sqlite3": "^4.0.9"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"
