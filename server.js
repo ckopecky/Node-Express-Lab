@@ -60,7 +60,7 @@ server.get('/api/posts/:id', (req, res) =>{
                     sendUserError(404, "The post with the specified ID does not exist", res)
                     return;
                 }
-                res.status(200).json(res)
+                res.status(200).json(post)
             })
             .catch(err=>{
                 sendUserError(500, "There was an error in retrieving this post", res)
