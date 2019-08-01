@@ -18,7 +18,7 @@ const sendUserError = (status, message, res) =>{
 };
 
 server.get('/', (req, res) =>{
-    res.send("<h1>Hello from Express No. 2!!</h1>");
+    res.send({Success: "Sanity check..."});
 });
 
 server.get('/api/posts', (req, res) =>{
