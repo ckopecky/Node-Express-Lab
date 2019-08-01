@@ -104,6 +104,52 @@ server.put('/api/posts/:id', (req, res) =>{
             })
     })
 
+server.get("/api/posts/:id/comments", (req, res) => {
+    const { id } = req.params;
+    db.findPostComments(id)
+        .then(response => {
+            if(response.length > 0){
+                res.status(200).json(response);
+            }
+            else {
+                res.status(400).json({Message: "Post does not have any comments"});
+            }
+        })
+        .catch(err => {
+            res.status(500).json({Error: err.message})
+        })
+})
+
+server.post("/api/posts/:id/comments", async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    const commentInfo = { ...body, post_id: id };
+  
+     try {
+      const posts = await db.findById(id);
+  
+       if (!posts) {
+        res.status(404).json({
+          message: "The post with the specified ID does not exist."
+        });
+      } else {
+        db.insertComment(commentInfo).then(post => {
+          if (commentInfo.text === "") {
+            res.status(400).json({
+              errorMessage: "Please provide text for the comment."
+            });
+          } else {
+            res.status(201).json(post);
+          }
+        });
+      }
+    } catch {
+      response.status(500).json({
+        error: "There was an error while saving the comment to the database."
+      });
+    }
+  });
+
 
 
 server.listen(port, () =>{console.log(`Server is listening on port ${port}`)});
